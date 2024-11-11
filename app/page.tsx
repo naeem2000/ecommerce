@@ -1,7 +1,7 @@
 export default function Home() {
 	return (
 		<main>
-			<p>awe</p>
+			<p>awe bru</p>
 		</main>
 	);
 }
