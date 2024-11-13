@@ -6,6 +6,7 @@ const client = createClient({
 });
 
 export async function getData() {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const data = await client.getEntries().then((response: any) => response);
 	return data;
 }
