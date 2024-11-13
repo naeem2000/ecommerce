@@ -1,7 +1,50 @@
-export default function Home() {
+import { getData } from './components/actions/data.actions';
+import Image from 'next/image';
+
+export default async function Home() {
+	const response = await getData();
 	return (
 		<main>
-			<p>awe</p>
+			<div className='flex items-start justify-start'>
+				{response.items.map(
+					(
+						items: {
+							fields: {
+								productImage: { fields: { file: { url: string } } };
+								productName: string;
+								price: string;
+								productType: string;
+								description: string;
+							};
+						},
+						index: number
+					) => {
+						return (
+							<div className='mr-20' key={index}>
+								<Image
+									src={`https:${items.fields.productImage.fields.file.url}`}
+									width={300}
+									height={300}
+									alt='awe'
+								/>
+								<p>
+									<strong>Product name:</strong> {items.fields.productName}
+								</p>
+								<p>
+									<strong>Product price:</strong> R{items.fields.price}
+								</p>
+								<p>
+									<strong>Product type:</strong> {items.fields.productType}
+								</p>
+								<p>
+									<strong>Product description:</strong>{' '}
+									{items.fields.description}
+								</p>
+							</div>
+						);
+					}
+				)}
+			</div>
 		</main>
 	);
 }
